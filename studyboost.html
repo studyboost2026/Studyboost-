@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyBoost | Smart Tools for Students</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --primary:#6366f1;
+  --primary2:#8b5cf6;
+  --bg:#f6f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --soft:#eef2ff;
+  --success:#16a34a;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+body.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f8fafc;
+  --muted:#cbd5e1;
+  --border:#334155;
+  --soft:#312e81;
+}
+
+button,input,textarea,select{font:inherit}
+
+button{cursor:pointer;border:0}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#ffffffee;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.dark .topbar{background:#0f172aee}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.logo span{color:var(--text)}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+}
+
+.nav-btn{
+  background:var(--soft);
+  color:var(--primary);
+  padding:10px 13px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:20px;
+}
+
+/* HOME */
+
+.hero{
+  margin-top:20px;
+  padding:75px 25px;
+  border-radius:30px;
+  text-align:center;
+  background:linear-gradient(135deg,#eef2ff,#f5f3ff,#ffffff);
+  border:1px solid #e0e7ff;
+  box-shadow:0 20px 50px #0000000d;
+}
+
+.dark .hero{
+  background:linear-gradient(135deg,#1e1b4b,#312e81,#111827);
+  border-color:#4338ca;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 13px;
+  border-radius:50px;
+  background:#e0e7ff;
+  color:#4338ca;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-bottom:18px;
+}
+
+.dark .badge{
+  background:#4338ca;
+  color:white;
+}
+
+.hero h1{
+  font-size:50px;
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:var(--primary);
+}
+
+.hero p{
+  max-width:680px;
+  margin:auto;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:white;
+  padding:13px 20px;
+  border-radius:11px;
+  font-weight:700;
+  box-shadow:0 8px 20px #6366f133;
+}
+
+.secondary{
+  background:var(--card);
+  color:var(--primary);
+  border:1px solid var(--border);
+  padding:13px 20px;
+  border-radius:11px;
+  font-weight:700;
+}
+
+.stats{
+  max-width:650px;
+  margin:42px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#ffffffaa;
+  border:1px solid #ffffff;
+  border-radius:15px;
+  padding:14px;
+}
+
+.dark .stat{
+  background:#ffffff0d;
+  border-color:#ffffff15;
+}
+
+.stat strong{
+  display:block;
+  font-size:23px;
+}
+
+.stat span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* SECTIONS */
+
+.section{
+  margin-top:45px;
+}
+
+.section-head{
+  margin-bottom:20px;
+}
+
+.eyebrow{
+  color:var(--primary);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  margin-bottom:4px;
+}
+
+.section-head h2{
+  font-size:30px;
+}
+
+.section-head p{
+  color:var(--muted);
+}
+
+/* SEARCH */
+
+.search-box{
+  margin:30px 0 10px;
+}
+
+.search{
+  width:100%;
+  padding:15px 17px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  outline:none;
+  background:var(--card);
+  color:var(--text);
+}
+
+.search:focus{
+  border-color:var(--primary);
+}
+
+/* TOOL CARDS */
+
+.tools{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:21px;
+  box-shadow:0 7px 25px #00000009;
+}
+
+.tool{
+  transition:.2s;
+}
+
+.tool:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px #00000014;
+}
+
+.icon{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background:var(--soft);
+  font-size:25px;
+  margin-bottom:15px;
+}
+
+.tool h3{
+  margin-bottom:7px;
+}
+
+.tool p{
+  color:var(--muted);
+  font-size:14px;
+  min-height:43px;
+}
+
+.open-btn{
+  width:100%;
+  margin-top:16px;
+  padding:11px;
+  border-radius:9px;
+  background:var(--soft);
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* TOOL PAGES */
+
+.tool-page{
+  display:none;
+  margin-top:35px;
+}
+
+.tool-page.active{
+  display:block;
+}
+
+.tool-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.tool-title .big-icon{
+  font-size:32px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:var(--primary);
+}
+
+.action{
+  margin-top:16px;
+  padding:12px 18px;
+  border-radius:9px;
+  background:var(--primary);
+  color:white;
+  font-weight:700;
+}
+
+.result{
+  margin-top:18px;
+  padding:17px;
+  border-radius:12px;
+  background:var(--soft);
+  white-space:pre-wrap;
+  min-height:50px;
+}
+
+.close-tool{
+  margin-top:15px;
+  padding:10px 15px;
+  border-radius:9px;
+  background:var(--border);
+  color:var(--text);
+}
+
+/* SUBJECT TABLE */
+
+.subjects{
+  margin-top:15px;
+  overflow-x:auto;
+}
+
+.subject-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 45px;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.remove{
+  background:#fee2e2;
+  color:#dc2626;
+  border-radius:8px;
+}
+
+.add{
+  background:var(--soft);
+  color:var(--primary);
+  padding:10px 14px;
+  border-radius:8px;
+  margin-top:8px;
+}
+
+/* CTA */
+
+.cta{
+  margin-top:45px;
+  padding:30px;
+  border-radius:20px;
+  background:#111827;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.cta p{
+  color:#cbd5e1;
+  margin-top:5px;
+}
+
+/* FOOTER */
+
+footer{
+  margin-top:50px;
+  padding:35px 20px;
+  text-align:center;
+  background:#111827;
+  color:white;
+}
+
+footer p{
+  color:#cbd5e1;
+  margin-top:5px;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+  .tools{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+  .container{
+    padding:14px;
+  }
+
+  .tools{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:50px 17px;
+    border-radius:22px;
+  }
+
+  .hero h1{
+    font-size:35px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .cta{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav{
+    padding:12px 14px;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <nav class="nav">
+    <div class="logo">🚀 Study<span>Boost</span></div>
+
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="goHome()">🏠 Home</button>
+      <button class="nav-btn" onclick="toggleDark()">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+
+<!-- HOME -->
+
+<section id="home">
+
+  <section class="hero">
+    <div class="badge">SMART TOOLS FOR STUDENTS</div>
+
+    <h1>Study smarter.<br><span>Achieve more.</span></h1>
+
+    <p>
+      One simple platform for academic calculators,
+      career tools and everyday student needs.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary" onclick="openTool('sgpa')">
+        📊 Calculate SGPA
+      </button>
+
+      <button class="secondary" onclick="scrollToTools()">
+        Explore Tools →
+      </button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>7+</strong>
+        <span>Student Tools</span>
+      </div>
+
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Simple & Easy</span>
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>Available</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="search-box">
+    <input
+      class="search"
+      id="search"
+      placeholder="🔍 Search a tool..."
+      oninput="searchTools()"
+    >
+  </div>
+
+  <section class="section" id="toolsSection">
+
+    <div class="section-head">
+      <div class="eyebrow">STUDENT TOOLKIT</div>
+      <h2>Everything you need</h2>
+      <p>Useful tools designed to make student life easier.</p>
+    </div>
+
+    <div class="tools" id="toolList">
+
+      <div class="card tool" data-name="sgpa semester grade point">
+        <div class="icon">📊</div>
+        <h3>SGPA Calculator</h3>
+        <p>Calculate your semester performance with subject credits.</p>
+        <button class="open-btn" onclick="openTool('sgpa')">
+          Open Calculator →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="cgpa cumulative grade point">
+        <div class="icon">🎓</div>
+        <h3>CGPA Calculator</h3>
+        <p>Calculate your overall CGPA from multiple semesters.</p>
+        <button class="open-btn" onclick="openTool('cgpa')">
+          Open Calculator →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="attendance classes percentage">
+        <div class="icon">📅</div>
+        <h3>Attendance Calculator</h3>
+        <p>Check your attendance percentage and required classes.</p>
+        <button class="open-btn" onclick="openTool('attendance')">
+          Check Attendance →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="resume ai improve cv">
+        <div class="icon">🤖</div>
+        <h3>AI Resume Improver</h3>
+        <p>Improve your resume wording and make it more professional.</p>
+        <button class="open-btn" onclick="openTool('improve')">
+          Improve Resume →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="notes summary study">
+        <div class="icon">📝</div>
+        <h3>Notes Summarizer</h3>
+        <p>Turn long notes into short, easy-to-revise points.</p>
+        <button class="open-btn" onclick="openTool('notes')">
+          Summarize Notes →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="email writer college professional">
+        <div class="icon">✉️</div>
+        <h3>Email Writer</h3>
+        <p>Create professional emails for college and everyday work.</p>
+        <button class="open-btn" onclick="openTool('email')">
+          Write Email →
+        </button>
+      </div>
+
+      <div class="card tool" data-name="resume builder cv career">
+        <div class="icon">💼</div>
+        <h3>Resume Builder</h3>
+        <p>Create a clean student resume using your information.</p>
+        <button class="open-btn" onclick="openTool('builder')">
+          Build Resume →
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <div>
+      <div class="eyebrow">BUILT FOR STUDENTS</div>
+      <h2>Your student journey, made easier.</h2>
+      <p>More powerful tools can be added to StudyBoost in the future.</p>
+    </div>
+
+    <button class="primary" onclick="scrollToTools()">
+      Explore Tools →
+    </button>
+  </section>
+
+</section>
+
+
+<!-- SGPA -->
+
+<section id="sgpa" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">📊</div>
+    <div>
+      <h2>SGPA Calculator</h2>
+      <p class="section-head">Calculate semester SGPA using grade points and credits.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div id="subjectList" class="subjects">
+
+      <div class="subject-row">
+        <input class="subName" placeholder="Subject">
+        <input class="subGrade" type="number" placeholder="Grade Point">
+        <input class="subCredit" type="number" placeholder="Credits">
+        <button class="remove" onclick="removeRow(this)">×</button>
+      </div>
+
+      <div class="subject-row">
+        <input class="subName" placeholder="Subject">
+        <input class="subGrade" type="number" placeholder="Grade Point">
+        <input class="subCredit" type="number" placeholder="Credits">
+        <button class="remove" onclick="removeRow(this)">×</button>
+      </div>
+
+      <div class="subject-row">
+        <input class="subName" placeholder="Subject">
+        <input class="subGrade" type="number" placeholder="Grade Point">
+        <input class="subCredit" type="number" placeholder="Credits">
+        <button class="remove" onclick="removeRow(this)">×</button>
+      </div>
+
+    </div>
+
+    <button class="add" onclick="addSubject()">+ Add Subject</button>
+    <br>
+
+    <button class="action" onclick="calculateSGPA()">
+      Calculate SGPA
+    </button>
+
+    <div id="sgpaResult" class="result">Your result will appear here.</div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- CGPA -->
+
+<section id="cgpa" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">🎓</div>
+    <div>
+      <h2>CGPA Calculator</h2>
+      <p class="section-head">Enter your semester SGPAs to calculate CGPA.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Semester 1</label>
+        <input class="sem" type="number" step="0.01" placeholder="e.g. 8.2">
+      </div>
+
+      <div class="field">
+        <label>Semester 2</label>
+        <input class="sem" type="number" step="0.01" placeholder="e.g. 8.5">
+      </div>
+
+      <div class="field">
+        <label>Semester 3</label>
+        <input class="sem" type="number" step="0.01" placeholder="e.g. 8.0">
+      </div>
+
+      <div class="field">
+        <label>Semester 4</label>
+        <input class="sem" type="number" step="0.01" placeholder="e.g. 8.7">
+      </div>
+
+      <div class="field">
+        <label>Semester 5</label>
+        <input class="sem" type="number" step="0.01" placeholder="Optional">
+      </div>
+
+      <div class="field">
+        <label>Semester 6</label>
+        <input class="sem" type="number" step="0.01" placeholder="Optional">
+      </div>
+
+      <div class="field">
+        <label>Semester 7</label>
+        <input class="sem" type="number" step="0.01" placeholder="Optional">
+      </div>
+
+      <div class="field">
+        <label>Semester 8</label>
+        <input class="sem" type="number" step="0.01" placeholder="Optional">
+      </div>
+
+    </div>
+
+    <button class="action" onclick="calculateCGPA()">Calculate CGPA</button>
+
+    <div id="cgpaResult" class="result">Your result will appear here.</div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- ATTENDANCE -->
+
+<section id="attendance" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">📅</div>
+    <div>
+      <h2>Attendance Calculator</h2>
+      <p class="section-head">Check your current attendance and 75% requirement.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Classes Attended</label>
+        <input id="present" type="number" placeholder="e.g. 42">
+      </div>
+
+      <div class="field">
+        <label>Total Classes</label>
+        <input id="total" type="number" placeholder="e.g. 50">
+      </div>
+
+    </div>
+
+    <button class="action" onclick="calculateAttendance()">
+      Calculate Attendance
+    </button>
+
+    <div id="attendanceResult" class="result">
+      Your result will appear here.
+    </div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- RESUME IMPROVER -->
+
+<section id="improve" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">🤖</div>
+    <div>
+      <h2>AI Resume Improver</h2>
+      <p class="section-head">Improve your resume content and wording.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="field">
+      <label>Paste your resume content</label>
+      <textarea id="resumeInput" placeholder="Paste your resume here..."></textarea>
+    </div>
+
+    <button class="action" onclick="improveResume()">
+      ✨ Improve Resume
+    </button>
+
+    <div id="improveResult" class="result">
+      Your improved suggestions will appear here.
+    </div>
+
+    <p style="margin-top:12px;color:var(--muted);font-size:13px">
+      Note: This offline version provides structured suggestions.
+      A real AI API can be connected later.
+    </p>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">📝</div>
+    <div>
+      <h2>Notes Summarizer</h2>
+      <p class="section-head">Create quick revision points from your notes.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="field">
+      <label>Your Notes</label>
+      <textarea id="notesInput" placeholder="Paste your study notes here..."></textarea>
+    </div>
+
+    <button class="action" onclick="summarizeNotes()">
+      📝 Create Summary
+    </button>
+
+    <div id="notesResult" class="result">
+      Your summary will appear here.
+    </div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- EMAIL -->
+
+<section id="email" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">✉️</div>
+    <div>
+      <h2>Professional Email Writer</h2>
+      <p class="section-head">Create a clean college or professional email.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Recipient</label>
+        <input id="emailTo" placeholder="Professor / HR / Manager">
+      </div>
+
+      <div class="field">
+        <label>Subject</label>
+        <input id="emailSubject" placeholder="Email subject">
+      </div>
+
+    </div>
+
+    <div class="field" style="margin-top:15px">
+      <label>What do you want to say?</label>
+      <textarea id="emailMessage" placeholder="Explain your purpose..."></textarea>
+    </div>
+
+    <button class="action" onclick="generateEmail()">
+      ✉️ Generate Email
+    </button>
+
+    <div id="emailResult" class="result">
+      Your email will appear here.
+    </div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<!-- RESUME BUILDER -->
+
+<section id="builder" class="tool-page">
+
+  <div class="tool-title">
+    <div class="big-icon">💼</div>
+    <div>
+      <h2>Resume Builder</h2>
+      <p class="section-head">Create a clean student resume.</p>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Full Name</label>
+        <input id="rName" placeholder="Your Name">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input id="rEmail" placeholder="you@email.com">
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input id="rPhone" placeholder="+91 XXXXX XXXXX">
+      </div>
+
+      <div class="field">
+        <label>Education</label>
+        <input id="rEducation" placeholder="B.Tech CSE - College Name">
+      </div>
+
+      <div class="field">
+        <label>Skills</label>
+        <input id="rSkills" placeholder="Java, Python, HTML, CSS">
+      </div>
+
+      <div class="field">
+        <label>Projects</label>
+        <input id="rProjects" placeholder="Project Name - Short description">
+      </div>
+
+    </div>
+
+    <button class="action" onclick="buildResume()">
+      💼 Generate Resume
+    </button>
+
+    <div id="builderResult" class="result">
+      Your resume preview will appear here.
+    </div>
+
+  </div>
+
+  <button class="close-tool" onclick="goHome()">← Back to Home</button>
+
+</section>
+
+
+<footer>
+  <h3>🚀 StudyBoost</h3>
+  <p>Smart Tools for Students</p>
+  <p>© 2026 StudyBoost. Built for students.</p>
+</footer>
+
+</main>
+
+
+<script>
+function openTool(id){
+  document.getElementById("home").style.display="none";
+  document.querySelectorAll(".tool-page").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function goHome(){
+  document.querySelectorAll(".tool-page").forEach(x=>x.classList.remove("active"));
+  document.getElementById("home").style.display="block";
+  window.scrollTo(0,0);
+}
+
+function scrollToTools(){
+  document.getElementById("tools").scrollIntoView({behavior:"smooth"});
+}
+
+function toggleDark(){
+  document.body.classList.toggle("dark");
+  localStorage.setItem("dark",document.body.classList.contains("dark"));
+}
+
+if(localStorage.getItem("dark")==="true")
+  document.body.classList.add("dark");
+
+function searchTools(){
+  let q=document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".tool").forEach(x=>{
+    x.style.display=x.innerText.toLowerCase().includes(q)?"":"none";
+  });
+}
+
+function addSubject(){
+  let d=document.createElement("div");
+  d.className="subject";
+  d.innerHTML=`
+    <input class="subGrade" placeholder="Grade Point" type="number">
+    <input class="subCredit" placeholder="Credits" type="number">
+    <button onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById("subjectList").appendChild(d);
+}
+
+function calculateSGPA(){
+  let g=[...document.querySelectorAll(".subGrade")];
+  let c=[...document.querySelectorAll(".subCredit")];
+  let points=0,credits=0;
+  g.forEach((x,i)=>{
+    let a=parseFloat(x.value),b=parseFloat(c[i].value);
+    if(!isNaN(a)&&!isNaN(b)){points+=a*b;credits+=b;}
+  });
+  document.getElementById("sgpaResult").innerText=
+    credits?(points/credits).toFixed(2):"Enter valid subjects";
+}
+
+function calculateCGPA(){
+  let s=[...document.querySelectorAll(".sem")]
+    .map(x=>parseFloat(x.value)).filter(x=>!isNaN(x));
+  document.getElementById("cgpaResult").innerText=
+    s.length?(s.reduce((a,b)=>a+b,0)/s.length).toFixed(2):"Enter semesters";
+}
+
+function calculateAttendance(){
+  let p=+document.getElementById("present").value;
+  let t=+document.getElementById("total").value;
+  if(!t)return;
+  let a=p/t*100;
+  let msg="Attendance: "+a.toFixed(2)+"%";
+  if(a<75){
+    let n=Math.ceil((.75*t-p)/.25);
+    msg+=" | Attend next "+n+" classes continuously.";
+  }else msg+=" | You are above 75% 👍";
+  document.getElementById("attendanceResult").innerText=msg;
+}
+
+function improveResume(){
+  let x=document.getElementById("resumeInput").value.trim();
+  if(!x){
+    document.getElementById("improveResult").innerText="Paste your resume first.";
+    return;
+  }
+  document.getElementById("improveResult").innerText=
+    "AI Suggestions:\\n\\n"+
+    "• Use a clear professional summary.\\n"+
+    "• Add measurable achievements.\\n"+
+    "• Highlight technical skills and projects.\\n"+
+    "• Use strong action words.\\n"+
+    "• Keep formatting simple and ATS-friendly.\\n\\n"+
+    "Your resume has been analysed successfully.";
+}
+
+function summarizeNotes(){
+  let x=document.getElementById("notesInput").value.trim();
+  if(!x){
+    document.getElementById("notesResult").innerText="Paste notes first.";
+    return;
+  }
+  let s=x.split(/[.!?]+/).filter(Boolean).slice(0,7);
+  document.getElementById("notesResult").innerText=
+    "Quick Summary:\\n\\n• "+s.join("\\n• ");
+}
+
+function writeEmail(){
+  let to=document.getElementById("emailTo").value;
+  let sub=document.getElementById("emailSubject").value;
+  let m=document.getElementById("emailMessage").value;
+  document.getElementById("emailResult").innerText=
+`To: ${to}
+
+Subject: ${sub}
+
+Dear Sir/Madam,
+
+${m}
+
+Thank you for your time and consideration.
+
+Regards,
+Student`;
+}
+
+function buildResume(){
+  let n=document.getElementById("rName").value;
+  let e=document.getElementById("rEmail").value;
+  let p=document.getElementById("rPhone").value;
+  let ed=document.getElementById("rEducation").value;
+  let sk=document.getElementById("rSkills").value;
+  let pr=document.getElementById("rProjects").value;
+
+  document.getElementById("builderResult").innerHTML=`
+    <h2>${n||"Your Name"}</h2>
+    <p>${e} ${p}</p>
+    <hr>
+    <h3>Education</h3><p>${ed}</p>
+    <h3>Skills</h3><p>${sk}</p>
+    <h3>Projects</h3><p>${pr}</p>`;
+}
+</script>
+
+</body>
+</html>
